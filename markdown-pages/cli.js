@@ -70,7 +70,7 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
-          () => createReplaceTrailingWhiteSpaceStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -88,7 +88,7 @@ function main(argv) {
           () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
           () => createReplaceCopyableStream(),
           () => createReplaceTabPanelStream(),
-          () => createReplaceTrailingWhiteSpaceStream(),
+          // () => createReplaceTrailingWhiteSpaceStream(),
         ]
       )
       break
@@ -236,7 +236,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
-        () => createReplaceTrailingWhiteSpaceStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 
@@ -245,7 +245,7 @@ function sync(argv) {
         () => createReplaceImagePathStream(DOCS_CN_IMAGE_CDN_URL),
         () => createReplaceCopyableStream(),
         () => createReplaceTabPanelStream(),
-        () => createReplaceTrailingWhiteSpaceStream(),
+        // () => createReplaceTrailingWhiteSpaceStream(),
       ])
       break
 

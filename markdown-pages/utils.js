@@ -42,6 +42,8 @@ const ignorePaths = [
   'contribute.md',
   'hack',
   'assets/get-started',
+  '.markdownlint.yaml',
+  'markdownlint-rules.md',
 ]
 
 function shouldIgnorePath(path) {
@@ -69,5 +71,7 @@ module.exports = {
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
   createReplaceTrailingWhiteSpaceStream,
+  createReplaceZHVersionMarkStrem,
+  createReplaceENVersionMarkStrem,
   shouldIgnorePath,
 }
