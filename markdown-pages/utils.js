@@ -71,7 +71,5 @@ module.exports = {
   createReplaceCopyableStream,
   createReplaceTabPanelStream,
   createReplaceTrailingWhiteSpaceStream,
-  createReplaceZHVersionMarkStrem,
-  createReplaceENVersionMarkStrem,
   shouldIgnorePath,
 }
