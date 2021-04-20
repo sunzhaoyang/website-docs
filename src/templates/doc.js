@@ -22,6 +22,7 @@ import ImproveDocLink from '../components/improveDocLink'
 import FeedbackDocLink from '../components/feedbackDocLink'
 import GitCommitInfo from '../components/gitCommitInfo'
 import UserFeedback from '../components/userFeedback'
+import DeprecationNotice from '../components/deprecationNotice'
 import { useLocation } from '@reach/router'
 import PromptBanner from '../../images/community-careers-banner.jpg'
 
@@ -179,29 +180,6 @@ const Doc = ({
     toc.classList.toggle('show')
   }
 
-  const DeprecationNotice = () => {
-    return (
-      <Shortcodes.Important>
-        <FormattedMessage
-          id="doc.deprecation.context"
-          values={{
-            link: (
-              <a
-                href={
-                  locale === 'zh'
-                    ? '/zh/tidb-in-kubernetes/stable/'
-                    : '/tidb-in-kubernetes/stable/'
-                }
-              >
-                <FormattedMessage id="doc.deprecation.link" />
-              </a>
-            ),
-          }}
-        />
-      </Shortcodes.Important>
-    )
-  }
-
   return (
     <Layout
       locale={locale}
@@ -210,6 +188,7 @@ const Doc = ({
     >
       <SEO
         title={frontmatter.title}
+        description={frontmatter.summary}
         meta={[
           {
             name: 'doc:locale',
@@ -262,8 +241,11 @@ const Doc = ({
               />
             </div>
             <section className="markdown-body doc-content column">
-              {repoInfo.repo === 'docs-tidb-operator' &&
-                repoInfo.ref === 'release-1.0' && <DeprecationNotice />}
+              <DeprecationNotice
+                relativeDir={relativeDir}
+                versions={versions}
+                base={base}
+              />
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>
@@ -318,6 +300,7 @@ export const query = graphql`
     mdx(id: { eq: $id }) {
       frontmatter {
         title
+        summary
       }
       body
       tableOfContents
