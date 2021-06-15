@@ -122,7 +122,7 @@ const Navbar = (prop) => {
             </IntlLink>
             {locale === 'en' && (
               <IntlLink
-                to="/tidbcloud/beta"
+                to="/tidbcloud/public-preview"
                 className={`navbar-item with-main-section ${
                   activeNav === 'tidbcloud' && !burgerActive ? 'is-active' : ''
                 }`}
@@ -143,7 +143,7 @@ const Navbar = (prop) => {
             <a
               href={
                 locale === 'zh'
-                  ? 'mailto:info@pingcap.com'
+                  ? 'https://pingcap.com/about-cn/#contact-us'
                   : 'https://pingcap.com/contact-us/'
               }
               className="navbar-item with-main-section"

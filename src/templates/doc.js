@@ -241,11 +241,14 @@ const Doc = ({
               />
             </div>
             <section className="markdown-body doc-content column">
-              <DeprecationNotice
-                relativeDir={relativeDir}
-                versions={versions}
-                base={base}
-              />
+              {docRefArray[0] !== 'tidbcloud' &&
+                docRefArray[0] !== 'dev-guide' && (
+                  <DeprecationNotice
+                    relativeDir={relativeDir}
+                    versions={versions}
+                    base={base}
+                  />
+                )}
               <MDXProvider components={Shortcodes}>
                 <MDXRenderer>{mdx.body}</MDXRenderer>
               </MDXProvider>

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import IntlLink from '../components/IntlLink'
 import { convertDocAndRef } from '../lib/version'
 
-const deprecateDocsVersions = {
+const deprecatedDocsVersions = {
   tidb: ['v2.1', 'v3.0', 'v3.1'],
   'tidb-data-migration': ['v1.0'],
   'tidb-in-kubernetes': ['v1.0'],
@@ -16,7 +16,7 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
   const docVersion = docRefArray[1]
   const docStableVersion = docRefArray[2]
   const baseName = base.replace('.md', '')
-  const showNoitce = deprecateDocsVersions[docType].includes(docVersion)
+  const showNoitce = deprecatedDocsVersions[docType].includes(docVersion)
   const stableDocLink = versions.includes('stable')
     ? `/${docType}/stable/${baseName === '_index' ? '' : baseName}`
     : `/${docType}/stable`
@@ -33,7 +33,7 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
               }}
             />
           </p>
-          <p>
+          <div>
             <FormattedMessage
               id={`doc.deprecation.${docType}.secondContext`}
               values={{
@@ -45,7 +45,7 @@ const DeprecationNotice = ({ relativeDir, versions, base }) => {
                 ),
               }}
             />
-          </p>
+          </div>
         </Shortcodes.Important>
       )}
     </>

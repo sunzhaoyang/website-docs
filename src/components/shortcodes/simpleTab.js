@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import '../../styles/components/simpletab.scss'
+import replaceInternalHref from '../../lib/replaceInternalHref.js'
 import { useLocation } from '@reach/router'
 
 const SimpleTab = React.memo(({ children }) => {
   const location = useLocation()
-  const selectedTab = location.hash ? location.hash.slice(1) : null
+  const pathArr = location.pathname.split('/')
+  let lang, type, version
+  if (pathArr[1] === 'zh') {
+    lang = pathArr[1]
+    type = pathArr[2]
+    version = pathArr[3]
+  } else {
+    lang = ''
+    type = pathArr[1]
+    version = pathArr[2]
+  }
+  const selectedTab = location.hash
+    ? decodeURIComponent(location.hash).slice(1)
+    : null
 
   const [value, setValue] = useState(0)
   const [tabLabelList, setTabLabelList] = useState([])
@@ -28,8 +42,14 @@ const SimpleTab = React.memo(({ children }) => {
   }, [children, multiTabs])
 
   useEffect(() => {
-    if (tabLabelList.includes(selectedTab)) {
-      const selectedTabIdx = tabLabelList.findIndex((el) => el === selectedTab)
+    const _tabLabelWithHyphenList = tabLabelList.map((tab) =>
+      tab.replace(/\s/g, '-')
+    )
+
+    if (_tabLabelWithHyphenList.includes(selectedTab)) {
+      const selectedTabIdx = _tabLabelWithHyphenList.findIndex(
+        (el) => el === selectedTab
+      )
       setValue(selectedTabIdx)
     } else {
       setValue(0)
@@ -54,6 +74,10 @@ const SimpleTab = React.memo(({ children }) => {
 
   const TabPanel = (props) => {
     const { children, value, index, ...other } = props
+
+    useEffect(() => {
+      replaceInternalHref(lang, type, version, true)
+    }, [])
 
     return (
       <div
@@ -85,7 +109,7 @@ const SimpleTab = React.memo(({ children }) => {
                     key={tabLabel + idx}
                     {...a11yProps('tab', `${idx}`)}
                   >
-                    <a href={`#${tabLabel}`}>{tabLabel}</a>
+                    <a href={`#${tabLabel}`.replace(/\s/g, '-')}>{tabLabel}</a>
                   </li>
                 ))}
             </ul>
