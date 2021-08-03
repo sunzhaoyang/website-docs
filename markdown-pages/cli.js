@@ -45,7 +45,7 @@ function main(argv) {
     case 'local-test':
       ;['_index.md', 'TOC.md', 'views.md'].forEach((m) => {
         writeContent(
-          'https://raw.githubusercontent.com/pingcap/docs/master/' + m,
+          'https://raw.githubusercontent.com/sunzhaoyang/docs/master/' + m,
           `${__dirname}/contents/en/docs-tidb/${ref}/${m}`,
           [
             () => createReplaceImagePathStream(DOCS_IMAGE_CDN_URL),
@@ -60,7 +60,7 @@ function main(argv) {
     case 'docs':
       retrieveAllMDs(
         {
-          owner: 'pingcap',
+          owner: 'sunzhaoyang',
           repo,
           ref,
           path: path ? path : '',
